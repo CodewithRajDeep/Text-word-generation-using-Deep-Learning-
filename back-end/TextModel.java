@@ -22,7 +22,7 @@ public class TextModel {
         return b;
     }
 
-    // Adds the observed word pair word and followingWord to the Markov model data
+   
     public void addWordPair(String word, String followingWord) {
         StatsObj obj;
         if (map.containsKey(word)) {
@@ -38,36 +38,32 @@ public class TextModel {
 
     public void loadData(String filename) {
         String text = getFileAsString(filename);
-        text = text.replaceAll("\\s+", " ").trim(); // collapse whitespace to single spaces
+        text = text.replaceAll("\\s+", " ").trim(); 
 
         String[] words = text.split(" "); // split by space
 
         for (int i = 0; i < words.length - 1; i++) {
             addWordPair(words[i], words[i + 1]);
         }
-        // Add all words in text to your model
-        // words is a String array of individual words from your input text.
+
 
     }
 
     public void loadPairData(String filename) {
         String text = getFileAsString(filename);
-        text = text.replaceAll("\\s+", " ").trim(); // collapse whitespace to single spaces
+        text = text.replaceAll("\\s+", " ").trim(); 
 
-        String[] words = text.split(" "); // split by space
+        String[] words = text.split(" "); 
 
         for (int i = 0; i < words.length - 2; i++) {
             String wordPair = words[i] + " " + words[i + 1];
             /* System.out.println(wordPair) */
             addWordPair(wordPair, words[i + 2]);
         }
-        // Add all words in text to your model
-        // words is a String array of individual words from your input text.
 
     }
 
     public String simulateNextWord(String word) {
-        /* you implement this! */
         StatsObj obj = map.get(word);
         return obj.getRandom();
     }
